@@ -1,0 +1,8 @@
+INTSTYLE=ise
+INFILE=E:\embedded\vending_machine\Coffee_Vending_machine_top.ncd
+OUTFILE=E:\embedded\vending_machine\Coffee_Vending_machine_top.bit
+FAMILY=Spartan3
+PART=xc3s1000-4fg456
+WORKINGDIR=E:\embedded\vending_machine
+LICENSE=WebPack
+USER_INFO=211745483_0_0_579

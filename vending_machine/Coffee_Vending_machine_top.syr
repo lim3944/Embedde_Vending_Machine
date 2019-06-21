@@ -1,0 +1,551 @@
+Release 14.7 - xst P.20131013 (nt64)
+Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
+--> Parameter TMPDIR set to xst/projnav.tmp
+
+
+Total REAL time to Xst completion: 0.00 secs
+Total CPU time to Xst completion: 0.12 secs
+ 
+--> Parameter xsthdpdir set to xst
+
+
+Total REAL time to Xst completion: 0.00 secs
+Total CPU time to Xst completion: 0.12 secs
+ 
+--> Reading design: Coffee_Vending_machine_top.prj
+
+TABLE OF CONTENTS
+  1) Synthesis Options Summary
+  2) HDL Compilation
+  3) Design Hierarchy Analysis
+  4) HDL Analysis
+  5) HDL Synthesis
+     5.1) HDL Synthesis Report
+  6) Advanced HDL Synthesis
+     6.1) Advanced HDL Synthesis Report
+  7) Low Level Synthesis
+  8) Partition Report
+  9) Final Report
+	9.1) Device utilization summary
+	9.2) Partition Resource Summary
+	9.3) TIMING REPORT
+
+
+=========================================================================
+*                      Synthesis Options Summary                        *
+=========================================================================
+---- Source Parameters
+Input File Name                    : "Coffee_Vending_machine_top.prj"
+Input Format                       : mixed
+Ignore Synthesis Constraint File   : NO
+
+---- Target Parameters
+Output File Name                   : "Coffee_Vending_machine_top"
+Output Format                      : NGC
+Target Device                      : xc3s1000-4-fg456
+
+---- Source Options
+Top Module Name                    : Coffee_Vending_machine_top
+Automatic FSM Extraction           : YES
+FSM Encoding Algorithm             : Auto
+Safe Implementation                : No
+FSM Style                          : LUT
+RAM Extraction                     : Yes
+RAM Style                          : Auto
+ROM Extraction                     : Yes
+Mux Style                          : Auto
+Decoder Extraction                 : YES
+Priority Encoder Extraction        : Yes
+Shift Register Extraction          : YES
+Logical Shifter Extraction         : YES
+XOR Collapsing                     : YES
+ROM Style                          : Auto
+Mux Extraction                     : Yes
+Resource Sharing                   : YES
+Asynchronous To Synchronous        : NO
+Multiplier Style                   : Auto
+Automatic Register Balancing       : No
+
+---- Target Options
+Add IO Buffers                     : YES
+Global Maximum Fanout              : 500
+Add Generic Clock Buffer(BUFG)     : 8
+Register Duplication               : YES
+Slice Packing                      : YES
+Optimize Instantiated Primitives   : NO
+Use Clock Enable                   : Yes
+Use Synchronous Set                : Yes
+Use Synchronous Reset              : Yes
+Pack IO Registers into IOBs        : Auto
+Equivalent register Removal        : YES
+
+---- General Options
+Optimization Goal                  : Speed
+Optimization Effort                : 1
+Keep Hierarchy                     : No
+Netlist Hierarchy                  : As_Optimized
+RTL Output                         : Yes
+Global Optimization                : AllClockNets
+Read Cores                         : YES
+Write Timing Constraints           : NO
+Cross Clock Analysis               : NO
+Hierarchy Separator                : /
+Bus Delimiter                      : <>
+Case Specifier                     : Maintain
+Slice Utilization Ratio            : 100
+BRAM Utilization Ratio             : 100
+Verilog 2001                       : YES
+Auto BRAM Packing                  : NO
+Slice Utilization Ratio Delta      : 5
+
+=========================================================================
+
+
+=========================================================================
+*                          HDL Compilation                              *
+=========================================================================
+Compiling verilog file "vending.v" in library work
+Compiling verilog file "edge_detect.v" in library work
+Module <Coffee_Vending_machine> compiled
+Compiling verilog file "vending_top.v" in library work
+Module <Edge_Detect> compiled
+Module <Coffee_Vending_machine_top> compiled
+No errors in compilation
+Analysis of file <"Coffee_Vending_machine_top.prj"> succeeded.
+ 
+
+=========================================================================
+*                     Design Hierarchy Analysis                         *
+=========================================================================
+Analyzing hierarchy for module <Coffee_Vending_machine_top> in library <work>.
+
+Analyzing hierarchy for module <Edge_Detect> in library <work>.
+
+Analyzing hierarchy for module <Coffee_Vending_machine> in library <work>.
+
+
+=========================================================================
+*                            HDL Analysis                               *
+=========================================================================
+Analyzing top module <Coffee_Vending_machine_top>.
+Module <Coffee_Vending_machine_top> is correct for synthesis.
+ 
+Analyzing module <Edge_Detect> in library <work>.
+Module <Edge_Detect> is correct for synthesis.
+ 
+Analyzing module <Coffee_Vending_machine> in library <work>.
+WARNING:Xst:905 - "vending.v" line 71: One or more signals are missing in the sensitivity list of always block. To enable synthesis of FPGA/CPLD hardware, XST will assume that all necessary signals are present in the sensitivity list. Please note that the result of the synthesis may differ from the initial design specification. The missing signals are:
+   <Sig_CH>
+Module <Coffee_Vending_machine> is correct for synthesis.
+ 
+
+=========================================================================
+*                           HDL Synthesis                               *
+=========================================================================
+
+Performing bidirectional port resolution...
+
+Synthesizing Unit <Edge_Detect>.
+    Related source file is "edge_detect.v".
+    Found 1-bit register for signal <D_OUT>.
+    Found 1-bit register for signal <prev_data>.
+    Summary:
+	inferred   2 D-type flip-flop(s).
+Unit <Edge_Detect> synthesized.
+
+
+Synthesizing Unit <Coffee_Vending_machine>.
+    Related source file is "vending.v".
+WARNING:Xst:1780 - Signal <Time> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:653 - Signal <Sig_CH> is used but never assigned. This sourceless signal will be automatically connected to value 0.
+    Register <Water> equivalent to <Coffee> has been removed
+    Found finite state machine <FSM_0> for signal <CurrST>.
+    -----------------------------------------------------------------------
+    | States             | 3                                              |
+    | Transitions        | 14                                             |
+    | Inputs             | 8                                              |
+    | Outputs            | 8                                              |
+    | Clock              | Clock                     (rising_edge)        |
+    | Clock enable       | CurrST$not0000            (negative)           |
+    | Reset              | nReset                    (negative)           |
+    | Reset type         | asynchronous                                   |
+    | Reset State        | 00                                             |
+    | Encoding           | automatic                                      |
+    | Implementation     | LUT                                            |
+    -----------------------------------------------------------------------
+    Found 1-bit register for signal <Cream>.
+    Found 1-bit register for signal <Sugar>.
+    Found 1-bit register for signal <Coffee>.
+    Found 5-bit register for signal <Change>.
+    Found 5-bit register for signal <Money>.
+    Found 1-bit register for signal <Busy>.
+    Found 1-bit register for signal <Busy_CH>.
+    Found 5-bit subtractor for signal <Change$addsub0000> created at line 166.
+    Found 5-bit comparator greatequal for signal <Enable_Buy$cmp_ge0000> created at line 65.
+    Found 5-bit addsub for signal <Money$share0000>.
+    Found 2-bit register for signal <Time_Click>.
+    Found 2-bit subtractor for signal <Time_Click$addsub0000> created at line 251.
+    Summary:
+	inferred   1 Finite State Machine(s).
+	inferred  17 D-type flip-flop(s).
+	inferred   3 Adder/Subtractor(s).
+	inferred   1 Comparator(s).
+Unit <Coffee_Vending_machine> synthesized.
+
+
+Synthesizing Unit <Coffee_Vending_machine_top>.
+    Related source file is "vending_top.v".
+WARNING:Xst:1306 - Output <SEG_DP> is never assigned.
+WARNING:Xst:646 - Signal <Water> is assigned but never used. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:646 - Signal <Sugar> is assigned but never used. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:646 - Signal <Money<4>> is assigned but never used. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:646 - Signal <Cream> is assigned but never used. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:646 - Signal <Coffee> is assigned but never used. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:646 - Signal <Change> is assigned but never used. This unconnected signal will be trimmed during the optimization process.
+    Found 16x7-bit ROM for signal <seg>.
+    Found 1-bit register for signal <clk_100>.
+    Found 20-bit up counter for signal <cnt_100>.
+    Summary:
+	inferred   1 ROM(s).
+	inferred   1 Counter(s).
+	inferred   1 D-type flip-flop(s).
+Unit <Coffee_Vending_machine_top> synthesized.
+
+INFO:Xst:1767 - HDL ADVISOR - Resource sharing has identified that some arithmetic operations in this design can share the same physical resources for reduced device utilization. For improved clock frequency you may try to disable resource sharing.
+
+=========================================================================
+HDL Synthesis Report
+
+Macro Statistics
+# ROMs                                                 : 1
+ 16x7-bit ROM                                          : 1
+# Adders/Subtractors                                   : 3
+ 2-bit subtractor                                      : 1
+ 5-bit addsub                                          : 1
+ 5-bit subtractor                                      : 1
+# Counters                                             : 1
+ 20-bit up counter                                     : 1
+# Registers                                            : 19
+ 1-bit register                                        : 16
+ 2-bit register                                        : 1
+ 5-bit register                                        : 2
+# Comparators                                          : 1
+ 5-bit comparator greatequal                           : 1
+
+=========================================================================
+
+=========================================================================
+*                       Advanced HDL Synthesis                          *
+=========================================================================
+
+Analyzing FSM <FSM_0> for best encoding.
+Optimizing FSM <ucoffee_vending_machine/CurrST/FSM> on signal <CurrST[1:2]> with user encoding.
+-------------------
+ State | Encoding
+-------------------
+ 00    | 00
+ 01    | 01
+ 10    | 10
+-------------------
+
+=========================================================================
+Advanced HDL Synthesis Report
+
+Macro Statistics
+# FSMs                                                 : 1
+# ROMs                                                 : 1
+ 16x7-bit ROM                                          : 1
+# Adders/Subtractors                                   : 3
+ 2-bit subtractor                                      : 1
+ 5-bit addsub                                          : 1
+ 5-bit subtractor                                      : 1
+# Counters                                             : 1
+ 20-bit up counter                                     : 1
+# Registers                                            : 28
+ Flip-Flops                                            : 28
+# Comparators                                          : 1
+ 5-bit comparator greatequal                           : 1
+
+=========================================================================
+
+=========================================================================
+*                         Low Level Synthesis                           *
+=========================================================================
+
+Optimizing unit <Coffee_Vending_machine_top> ...
+
+Optimizing unit <Coffee_Vending_machine> ...
+WARNING:Xst:2677 - Node <ucoffee_vending_machine/Coffee> of sequential type is unconnected in block <Coffee_Vending_machine_top>.
+WARNING:Xst:2677 - Node <ucoffee_vending_machine/Cream> of sequential type is unconnected in block <Coffee_Vending_machine_top>.
+WARNING:Xst:2677 - Node <ucoffee_vending_machine/Sugar> of sequential type is unconnected in block <Coffee_Vending_machine_top>.
+
+Mapping all equations...
+Building and optimizing final netlist ...
+Found area constraint ratio of 100 (+ 5) on block Coffee_Vending_machine_top, actual ratio is 0.
+
+Final Macro Processing ...
+
+=========================================================================
+Final Register Report
+
+Macro Statistics
+# Registers                                            : 47
+ Flip-Flops                                            : 47
+
+=========================================================================
+
+=========================================================================
+*                           Partition Report                            *
+=========================================================================
+
+Partition Implementation Status
+-------------------------------
+
+  No Partitions were found in this design.
+
+-------------------------------
+
+=========================================================================
+*                            Final Report                               *
+=========================================================================
+Final Results
+RTL Top Level Output File Name     : Coffee_Vending_machine_top.ngr
+Top Level Output File Name         : Coffee_Vending_machine_top
+Output Format                      : NGC
+Optimization Goal                  : Speed
+Keep Hierarchy                     : No
+
+Design Statistics
+# IOs                              : 23
+
+Cell Usage :
+# BELS                             : 162
+#      GND                         : 1
+#      INV                         : 8
+#      LUT1                        : 19
+#      LUT2                        : 29
+#      LUT2_D                      : 3
+#      LUT2_L                      : 3
+#      LUT3                        : 4
+#      LUT3_D                      : 1
+#      LUT3_L                      : 1
+#      LUT4                        : 41
+#      LUT4_D                      : 1
+#      LUT4_L                      : 5
+#      MUXCY                       : 24
+#      MUXF5                       : 1
+#      VCC                         : 1
+#      XORCY                       : 20
+# FlipFlops/Latches                : 47
+#      FDC                         : 30
+#      FDCE                        : 16
+#      FDE                         : 1
+# Clock Buffers                    : 2
+#      BUFG                        : 1
+#      BUFGP                       : 1
+# IO Buffers                       : 21
+#      IBUF                        : 6
+#      OBUF                        : 15
+=========================================================================
+
+Device utilization summary:
+---------------------------
+
+Selected Device : 3s1000fg456-4 
+
+ Number of Slices:                       58  out of   7680     0%  
+ Number of Slice Flip Flops:             47  out of  15360     0%  
+ Number of 4 input LUTs:                115  out of  15360     0%  
+ Number of IOs:                          23
+ Number of bonded IOBs:                  22  out of    333     6%  
+ Number of GCLKs:                         2  out of      8    25%  
+
+---------------------------
+Partition Resource Summary:
+---------------------------
+
+  No Partitions were found in this design.
+
+---------------------------
+
+
+=========================================================================
+TIMING REPORT
+
+NOTE: THESE TIMING NUMBERS ARE ONLY A SYNTHESIS ESTIMATE.
+      FOR ACCURATE TIMING INFORMATION PLEASE REFER TO THE TRACE REPORT
+      GENERATED AFTER PLACE-and-ROUTE.
+
+Clock Information:
+------------------
+-----------------------------------+------------------------+-------+
+Clock Signal                       | Clock buffer(FF name)  | Load  |
+-----------------------------------+------------------------+-------+
+FPGA_CLK                           | BUFGP                  | 21    |
+clk_1001                           | BUFG                   | 26    |
+-----------------------------------+------------------------+-------+
+
+Asynchronous Control Signals Information:
+----------------------------------------
+-----------------------------------------------------------------------+------------------------+-------+
+Control Signal                                                         | Buffer(FF name)        | Load  |
+-----------------------------------------------------------------------+------------------------+-------+
+FPGA_RSTB_inv(ucoffee_vending_machine/CurrST_FSM_Acst_FSM_inv1_INV_0:O)| NONE(clk_100)          | 46    |
+-----------------------------------------------------------------------+------------------------+-------+
+
+Timing Summary:
+---------------
+Speed Grade: -4
+
+   Minimum period: 8.177ns (Maximum Frequency: 122.294MHz)
+   Minimum input arrival time before clock: 7.589ns
+   Maximum output required time after clock: 9.243ns
+   Maximum combinational path delay: 8.770ns
+
+Timing Detail:
+--------------
+All values displayed in nanoseconds (ns)
+
+=========================================================================
+Timing constraint: Default period analysis for Clock 'FPGA_CLK'
+  Clock period: 6.873ns (frequency: 145.497MHz)
+  Total number of paths / destination ports: 631 / 22
+-------------------------------------------------------------------------
+Delay:               6.873ns (Levels of Logic = 21)
+  Source:            cnt_100_1 (FF)
+  Destination:       cnt_100_19 (FF)
+  Source Clock:      FPGA_CLK rising
+  Destination Clock: FPGA_CLK rising
+
+  Data Path: cnt_100_1 to cnt_100_19
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDC:C->Q              2   0.720   1.216  cnt_100_1 (cnt_100_1)
+     LUT1:I0->O            1   0.551   0.000  Mcount_cnt_100_cy<1>_rt (Mcount_cnt_100_cy<1>_rt)
+     MUXCY:S->O            1   0.500   0.000  Mcount_cnt_100_cy<1> (Mcount_cnt_100_cy<1>)
+     MUXCY:CI->O           1   0.064   0.000  Mcount_cnt_100_cy<2> (Mcount_cnt_100_cy<2>)
+     MUXCY:CI->O           1   0.064   0.000  Mcount_cnt_100_cy<3> (Mcount_cnt_100_cy<3>)
+     MUXCY:CI->O           1   0.064   0.000  Mcount_cnt_100_cy<4> (Mcount_cnt_100_cy<4>)
+     MUXCY:CI->O           1   0.064   0.000  Mcount_cnt_100_cy<5> (Mcount_cnt_100_cy<5>)
+     MUXCY:CI->O           1   0.064   0.000  Mcount_cnt_100_cy<6> (Mcount_cnt_100_cy<6>)
+     MUXCY:CI->O           1   0.064   0.000  Mcount_cnt_100_cy<7> (Mcount_cnt_100_cy<7>)
+     MUXCY:CI->O           1   0.064   0.000  Mcount_cnt_100_cy<8> (Mcount_cnt_100_cy<8>)
+     MUXCY:CI->O           1   0.064   0.000  Mcount_cnt_100_cy<9> (Mcount_cnt_100_cy<9>)
+     MUXCY:CI->O           1   0.064   0.000  Mcount_cnt_100_cy<10> (Mcount_cnt_100_cy<10>)
+     MUXCY:CI->O           1   0.064   0.000  Mcount_cnt_100_cy<11> (Mcount_cnt_100_cy<11>)
+     MUXCY:CI->O           1   0.064   0.000  Mcount_cnt_100_cy<12> (Mcount_cnt_100_cy<12>)
+     MUXCY:CI->O           1   0.064   0.000  Mcount_cnt_100_cy<13> (Mcount_cnt_100_cy<13>)
+     MUXCY:CI->O           1   0.064   0.000  Mcount_cnt_100_cy<14> (Mcount_cnt_100_cy<14>)
+     MUXCY:CI->O           1   0.064   0.000  Mcount_cnt_100_cy<15> (Mcount_cnt_100_cy<15>)
+     MUXCY:CI->O           1   0.064   0.000  Mcount_cnt_100_cy<16> (Mcount_cnt_100_cy<16>)
+     MUXCY:CI->O           1   0.064   0.000  Mcount_cnt_100_cy<17> (Mcount_cnt_100_cy<17>)
+     MUXCY:CI->O           0   0.064   0.000  Mcount_cnt_100_cy<18> (Mcount_cnt_100_cy<18>)
+     XORCY:CI->O           1   0.904   1.140  Mcount_cnt_100_xor<19> (Result<19>)
+     LUT2:I0->O            1   0.551   0.000  Mcount_cnt_100_eqn_191 (Mcount_cnt_100_eqn_19)
+     FDC:D                     0.203          cnt_100_19
+    ----------------------------------------
+    Total                      6.873ns (4.517ns logic, 2.356ns route)
+                                       (65.7% logic, 34.3% route)
+
+=========================================================================
+Timing constraint: Default period analysis for Clock 'clk_1001'
+  Clock period: 8.177ns (frequency: 122.294MHz)
+  Total number of paths / destination ports: 613 / 37
+-------------------------------------------------------------------------
+Delay:               8.177ns (Levels of Logic = 4)
+  Source:            ucoffee_vending_machine/Money_1 (FF)
+  Destination:       ucoffee_vending_machine/Time_Click_1 (FF)
+  Source Clock:      clk_1001 rising
+  Destination Clock: clk_1001 rising
+
+  Data Path: ucoffee_vending_machine/Money_1 to ucoffee_vending_machine/Time_Click_1
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDCE:C->Q            14   0.720   1.382  ucoffee_vending_machine/Money_1 (ucoffee_vending_machine/Money_1)
+     LUT4_L:I1->LO         1   0.551   0.126  ucoffee_vending_machine/CurrST_FSM_FFd1-In1_SW0 (N29)
+     LUT4:I3->O            9   0.551   1.150  ucoffee_vending_machine/CurrST_FSM_FFd1-In1 (ucoffee_vending_machine/N11)
+     LUT4:I3->O            5   0.551   1.116  ucoffee_vending_machine/Busy_and00001 (ucoffee_vending_machine/Busy_and0000)
+     LUT4:I1->O            2   0.551   0.877  ucoffee_vending_machine/Time_Click_not0001 (ucoffee_vending_machine/Time_Click_not0001)
+     FDCE:CE                   0.602          ucoffee_vending_machine/Time_Click_0
+    ----------------------------------------
+    Total                      8.177ns (3.526ns logic, 4.651ns route)
+                                       (43.1% logic, 56.9% route)
+
+=========================================================================
+Timing constraint: Default OFFSET IN BEFORE for Clock 'clk_1001'
+  Total number of paths / destination ports: 38 / 19
+-------------------------------------------------------------------------
+Offset:              7.589ns (Levels of Logic = 5)
+  Source:            FPGA_RSTB (PAD)
+  Destination:       ucoffee_vending_machine/Time_Click_1 (FF)
+  Destination Clock: clk_1001 rising
+
+  Data Path: FPGA_RSTB to ucoffee_vending_machine/Time_Click_1
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     IBUF:I->O             8   0.821   1.422  FPGA_RSTB_IBUF (FPGA_RSTB_IBUF)
+     LUT4:I0->O            1   0.551   0.000  ucoffee_vending_machine/CurrST_FSM_FFd1-In27_SW0_SW11_G (N67)
+     MUXF5:I1->O           1   0.360   0.869  ucoffee_vending_machine/CurrST_FSM_FFd1-In27_SW0_SW11 (N46)
+     LUT4:I2->O            4   0.551   0.985  ucoffee_vending_machine/CurrST_FSM_FFd1-In35 (ucoffee_vending_machine/CurrST_cmp_eq0002)
+     LUT4:I2->O            2   0.551   0.877  ucoffee_vending_machine/Time_Click_not0001 (ucoffee_vending_machine/Time_Click_not0001)
+     FDCE:CE                   0.602          ucoffee_vending_machine/Time_Click_0
+    ----------------------------------------
+    Total                      7.589ns (3.436ns logic, 4.153ns route)
+                                       (45.3% logic, 54.7% route)
+
+=========================================================================
+Timing constraint: Default OFFSET OUT AFTER for Clock 'clk_1001'
+  Total number of paths / destination ports: 29 / 8
+-------------------------------------------------------------------------
+Offset:              9.243ns (Levels of Logic = 2)
+  Source:            ucoffee_vending_machine/Money_2 (FF)
+  Destination:       SEG_F (PAD)
+  Source Clock:      clk_1001 rising
+
+  Data Path: ucoffee_vending_machine/Money_2 to SEG_F
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDCE:C->Q            15   0.720   1.527  ucoffee_vending_machine/Money_2 (ucoffee_vending_machine/Money_2)
+     LUT4:I0->O            1   0.551   0.801  Mrom_seg111 (SEG_F_OBUF)
+     OBUF:I->O                 5.644          SEG_F_OBUF (SEG_F)
+    ----------------------------------------
+    Total                      9.243ns (6.915ns logic, 2.328ns route)
+                                       (74.8% logic, 25.2% route)
+
+=========================================================================
+Timing constraint: Default path analysis
+  Total number of paths / destination ports: 1 / 1
+-------------------------------------------------------------------------
+Delay:               8.770ns (Levels of Logic = 3)
+  Source:            DIP_SW<0> (PAD)
+  Destination:       LED<1> (PAD)
+
+  Data Path: DIP_SW<0> to LED<1>
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     IBUF:I->O             2   0.821   0.877  DIP_SW_0_IBUF (DIP_SW_0_IBUF)
+     INV:I->O              2   0.551   0.877  u0_not00001_INV_0 (LED_1_OBUF)
+     OBUF:I->O                 5.644          LED_1_OBUF (LED<1>)
+    ----------------------------------------
+    Total                      8.770ns (7.016ns logic, 1.754ns route)
+                                       (80.0% logic, 20.0% route)
+
+=========================================================================
+
+
+Total REAL time to Xst completion: 4.00 secs
+Total CPU time to Xst completion: 3.97 secs
+ 
+--> 
+
+Total memory usage is 4534856 kilobytes
+
+Number of errors   :    0 (   0 filtered)
+Number of warnings :   14 (   0 filtered)
+Number of infos    :    1 (   0 filtered)
+

@@ -1,0 +1,8 @@
+Release 14.7 Drc P.20131013 (nt64)
+Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
+
+Fri Jun 21 10:41:14 2019
+
+drc -z Coffee_Vending_machine_top.ncd Coffee_Vending_machine_top.pcf
+
+DRC detected 0 errors and 0 warnings.

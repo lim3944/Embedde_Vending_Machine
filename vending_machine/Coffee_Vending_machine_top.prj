@@ -1,0 +1,3 @@
+verilog work "vending.v"
+verilog work "edge_detect.v"
+verilog work "vending_top.v"
